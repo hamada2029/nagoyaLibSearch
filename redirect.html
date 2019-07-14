@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirect</title>
+</head>
+<body>
+    send query w={word}
+    <script type="text/javascript">
+        var QStr = function(){
+            this.d = {};
+            this.parse();
+        };
+
+        QStr.prototype.parse = function(){
+            this.d = {};
+            var items = location.search.substr(1).split('&');
+            for(var i = 0; i < items.length; i++){
+                var pair = items[i].split('=');
+                this.d[pair[0]] = decodeURIComponent(pair[1]);
+            }
+        };
+
+        QStr.prototype.get = function(k){
+            return this.d[k];
+        };
+
+        var w = new QStr().get('w');
+
+        if(w){
+            var myform = document.createElement('form');
+            myform.action = 'https://www.library.city.nagoya.jp/licsxp-opac/WOpacMnuTopInitAction.do?WebLinkFlag=1&moveToGamenId=tifschcmpdpre&SchType=1';
+            myform.method = 'POST';
+            var inp = document.createElement('input');
+            inp.name = 'kensaku_keyword';
+            inp.value = w;
+            myform.appendChild(inp);
+            myform.submit();
+        }
+
+
+    </script>
+
+</body>
+</html>
