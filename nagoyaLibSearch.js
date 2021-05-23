@@ -6,6 +6,7 @@ var inp = document.createElement('input');
 inp.name = 'kensaku_keyword';
 inp.value = 'バックミンスター';
 myform.appendChild(inp);
+document.body.appendChild(myform);
 myform.submit();
 
 
